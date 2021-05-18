@@ -8,24 +8,26 @@ import page.BasePage;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constants.XPath.StudentDetailsPage.*;
+
 public class StudentDetailsPage extends BasePage {
 
-    @FindBy(xpath = "//a[contains(@class, 'tab__active')]")
+    @FindBy(xpath = LABEL_STUDENTS_DETAILS)
     private WebElement labelStudentsDetails;
 
-    @FindBy(xpath = "//div[@class='col-12 col-md-6']")
+    @FindBy(xpath = FIRST_NAME)
     private WebElement firstName;
 
-    @FindBy(xpath = "//div[@class='col-12 col-md-6 ']/span[not(contains(text(), '@'))]")
+    @FindBy(xpath = LAST_NAME)
     private WebElement lastName;
 
-    @FindBy(xpath = "//span[contains(text(), '@')]")
+    @FindBy(xpath = EMAIL)
     private WebElement email;
 
-    @FindBy(xpath = "//a[contains(@href, '/groups/')]")
+    @FindBy(xpath = LIST_OF_GROUPS)
     private List<WebElement> listOfGroups;
 
-    @FindBy(xpath = "//a[contains(@href, '/lessons/')]")
+    @FindBy(xpath = LIST_OF_LESSONS)
     private List<WebElement> listOfLessons;
 
     public StudentDetailsPage(WebDriver driver) {

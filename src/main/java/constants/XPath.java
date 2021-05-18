@@ -104,5 +104,25 @@ public class XPath {
                 CONFIRM_COURSE_DELETE_BTN = "//button[contains(@class,'btn-danger')]";
     }
 
+    public interface EditStudentsDetailsPage {
+        String LABEL_STUDENTS_DETAILS = "//div[@class='nav nav-tabs']//a[not(contains(@class, 'tab__active'))]",
+                LABEL_EDIT_STUDENTS_DETAILS = "//a[contains(@class, 'tab__active')]",
+                FIRST_NAME = "//input[@name='firstName']",
+                LAST_NAME = "//input[@name='lastName']",
+                EMAIL = "//input[@name='email']",
+                LIST_OF_GROUPS = "//li[@data-groupid]",
+                BUTTON_EXCLUDE = "//button[contains(@class, 'exclude-btn')]",
+                BUTTON_CLEAR = "//button[@type='reset']",
+                BUTTON_SAVE = "//button[@type='submit']";
+    }
+
+    public interface StudentDetailsPage {
+        String LABEL_STUDENTS_DETAILS = "//a[contains(@class, 'tab__active')]",
+                FIRST_NAME = "//div[@class='col-12 col-md-6']",
+                LAST_NAME = "//div[@class='col-12 col-md-6 ']/span[not(contains(text(), '@'))]",
+                EMAIL = "//span[contains(text(), '@')]",
+                LIST_OF_GROUPS = "//a[contains(@href, '/groups/')]",
+                LIST_OF_LESSONS = "//a[contains(@href, '/lessons/')]";
+    }
 
 }

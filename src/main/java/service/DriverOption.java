@@ -10,6 +10,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -52,13 +53,6 @@ public class DriverOption {
                 if (environment.isIncognitoModeOn()) operaOptions.addArguments("-private");
                 WebDriverManager.operadriver().setup();
                 return new OperaDriver(operaOptions);
-            case "explorer":
-                InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-                //https://docs.microsoft.com/en-US/troubleshoot/browsers/32-bit-browser-applications-not-working-as-expected
-                ieOptions.setCapability(InternetExplorerDriver.FORCE_CREATE_PROCESS, true);
-                if (environment.isIncognitoModeOn()) ieOptions.addCommandSwitches("-private");
-                WebDriverManager.iedriver().setup();
-                return new InternetExplorerDriver(ieOptions);
             default:
                 throw new RuntimeException();
         }

@@ -8,25 +8,27 @@ import page.BasePage;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constants.XPath.EditStudentsDetailsPage.*;
+
 public class EditStudentsDetailsPage extends BasePage {
 
-    @FindBy(xpath = "//div[@class='nav nav-tabs']//a[not(contains(@class, 'tab__active'))]")
+    @FindBy(xpath = LABEL_STUDENTS_DETAILS)
     private WebElement labelStudentsDetails;
-    @FindBy(xpath = "//a[contains(@class, 'tab__active')]")
+    @FindBy(xpath = LABEL_EDIT_STUDENTS_DETAILS)
     private WebElement labelEditStudentsDetails;
-    @FindBy(xpath = "//input[@name='firstName']")
+    @FindBy(xpath = FIRST_NAME)
     private WebElement firstName;
-    @FindBy(xpath = "//input[@name='lastName']")
+    @FindBy(xpath = LAST_NAME)
     private WebElement lastName;
-    @FindBy(xpath = "//input[@name='email']")
+    @FindBy(xpath = EMAIL)
     private WebElement email;
-    @FindBy(xpath = "//li[@data-groupid]")
+    @FindBy(xpath = LIST_OF_GROUPS)
     private List<WebElement> listOfGroups;
-    @FindBy(xpath = "//button[contains(@class, 'exclude-btn')]")
+    @FindBy(xpath = BUTTON_EXCLUDE)
     private WebElement buttonExclude;
-    @FindBy(xpath = "//button[@type='reset']")
+    @FindBy(xpath = BUTTON_CLEAR)
     private WebElement buttonClear;
-    @FindBy(xpath = "//button[@type='submit']")
+    @FindBy(xpath = BUTTON_SAVE)
     private WebElement buttonSave;
 
     public EditStudentsDetailsPage(WebDriver driver) {

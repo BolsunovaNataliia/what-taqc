@@ -8,13 +8,12 @@ import step.changepassword.ChangePasswordPageSteps;
 import step.courses.CoursesStep;
 import step.group.ListOfGroupsPageStep;
 import step.lesson.ListOfLessonPageStep;
-import step.mentor.ListOfMentorsPageStep;
 import step.myprofile.MyProfilePageStep;
 import step.secretary.ListOfSecretaryPageStep;
 import step.signin.SignInPageStep;
 import step.student.ListOfStudentsPageStep;
 import step.support.SupportPageStep;
-import step.unassigned.UnassignedUsersStep;
+import step.unassigned.ListOfUnassignedUsersPageStep;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -40,9 +39,9 @@ public abstract class BaseStep extends Step {
         return new ListOfSecretaryPageStep(driver);
     }
 
-    public UnassignedUsersStep clickUnassignedSidebar(Class<? extends BasePage> context, WebDriver driver) {
+    public ListOfUnassignedUsersPageStep clickUnassignedSidebar(Class<? extends BasePage> context, WebDriver driver) {
         clickSidebarItem(context, Constants.PageName.UNASSIGNED, driver);
-        return new UnassignedUsersStep(driver);
+        return new ListOfUnassignedUsersPageStep(driver);
     }
 
     public SupportPageStep clickSupportSidebar(Class<? extends BasePage> context, WebDriver driver) {
@@ -50,9 +49,9 @@ public abstract class BaseStep extends Step {
         return new SupportPageStep(driver);
     }
 
-    public ListOfMentorsPageStep clickMentorsSidebar(Class<? extends BasePage> context, WebDriver driver) {
+    public step.mentor.ListOfMentorsPageStep clickMentorsSidebar(Class<? extends BasePage> context, WebDriver driver) {
         clickSidebarItem(context, Constants.PageName.MENTOR_LIST, driver);
-        return new ListOfMentorsPageStep(driver);
+        return new step.mentor.ListOfMentorsPageStep(driver);
     }
 
     public ListOfGroupsPageStep clickGroupsSidebar(Class<? extends BasePage> context, WebDriver driver) {
