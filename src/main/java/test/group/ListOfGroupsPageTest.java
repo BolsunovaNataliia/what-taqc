@@ -1,28 +1,24 @@
 package test.group;
 
-import org.openqa.selenium.By;
+import entity.ReaderFileJson;
+import entity.User;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import page.signin.SignInPage;
-
+import page.student.ListOfStudentPage;
 import step.group.ListOfGroupsPageStep;
+import step.student.ListOfStudentsPageStep;
 import test.BaseTest;
 
 public class ListOfGroupsPageTest extends BaseTest {
     ListOfGroupsPageStep listOfGroupsPageStep;
 
-    @BeforeMethod
+    @BeforeMethod(groups = "admin")
     public void prepare() {
-        SignInPage signInPage = new SignInPage(driver);
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
 
-        signInPage.fillEmail(email);
-        signInPage.fillPassword(password);
-        signInPage.clickSignInButton();
-        driver.findElement(By.xpath("//a[@data-id='4']")).click();
-
-        listOfGroupsPageStep = new ListOfGroupsPageStep(driver);
+        listOfGroupsPageStep = signInPageStep
+                .clickSignInBtn(ListOfStudentsPageStep.class, driver)
+                .clickGroupsSidebar(ListOfStudentPage.class,driver);
     }
 
     @Test

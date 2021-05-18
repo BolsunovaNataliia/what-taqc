@@ -8,17 +8,14 @@ import test.BaseTest;
 
 public class WHAT_14 extends BaseTest {
 
-    @Test
+    @Test(groups = "admin" )
     public void verifyValuesReturn() throws InterruptedException{
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
+
         String courseID = "0";
         String newCourseName = "Basic Course";
         String initialCourseName = "Курс для демо";
 
         signInPageStep
-                .setEmail(email)
-                .setPassword(password)
                 .clickSignInBtn(ListOfStudentsPageStep.class, driver)
                 .clickCoursesSidebar(ListOfStudentPage.class,driver)
                 .verifyPageHeaderName(Constants.PageName.COURSE_LIST)
@@ -26,8 +23,8 @@ public class WHAT_14 extends BaseTest {
                 .verifyPageHeaderName(Constants.PageName.COURSE_EDIT)
                 // step('1')
                 // Clean 'Course name' field, verify 'Course Name' field is cleaned.
-                .fillEditCourseNameInput("")
-                .verifyEditCourseNameInput("")
+                .fillEditCourseNameInput(Constants.EMPTY_STRING)
+                .verifyEditCourseNameInput(Constants.EMPTY_STRING)
                 // step('2')
                 // Fill 'Course name' field, verify it's value is 'Basic Course'.
                 .fillEditCourseNameInput(newCourseName)

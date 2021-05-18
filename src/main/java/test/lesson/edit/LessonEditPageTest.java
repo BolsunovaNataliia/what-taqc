@@ -1,6 +1,9 @@
 package test.lesson.edit;
 
 import constants.Constants;
+import entity.ReaderFileJson;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
 import step.student.ListOfStudentsPageStep;
@@ -9,9 +12,10 @@ import test.BaseTest;
 public class LessonEditPageTest extends BaseTest {
 
     @Test
-    public void exampleLessonTest() {
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
+    @Parameters({"admin"})
+    public void exampleLessonTest(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
+
         String themeName = "Types";
         String groupName = "Griffindorrr";
         String fullName = "Pavel Kundenko";
@@ -19,8 +23,8 @@ public class LessonEditPageTest extends BaseTest {
         int studentId = 1;
 
         signInPageStep
-                .setEmail(email)
-                .setPassword(password)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
                 .clickSignInBtn(ListOfStudentsPageStep.class,driver)
                 .clickLessonSidebar(ListOfStudentPage.class,driver)
                 .clickLessonEdit(1, driver)

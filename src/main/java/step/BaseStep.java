@@ -77,49 +77,49 @@ public abstract class BaseStep extends Step {
     }
 
 
-    public <T extends BaseStep> T verifySidebarItemStudents(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemStudents(Class<T> stepContext,
                                                             Class<? extends BasePage> pageContext,
                                                             boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.STUDENT_LIST, driver);
     }
 
-    public <T extends BaseStep> T verifySidebarItemLessons(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemLessons(Class<T> stepContext,
                                                            Class<? extends BasePage> pageContext,
                                                            boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.LESSON_LIST, driver);
     }
 
-    public <T extends BaseStep> T verifySidebarItemCourses(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemCourses(Class<T> stepContext,
                                                             Class<? extends BasePage> pageContext,
                                                             boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.COURSE_LIST, driver);
     }
 
-    public <T extends BaseStep> T verifySidebarItemSecretaries(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemSecretaries(Class<T> stepContext,
                                                             Class<? extends BasePage> pageContext,
                                                             boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.SECRETARY_LIST, driver);
     }
 
-    public <T extends BaseStep> T verifySidebarItemUnassigned(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemUnassigned(Class<T> stepContext,
                                                            Class<? extends BasePage> pageContext,
                                                            boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.UNASSIGNED, driver);
     }
 
-    public <T extends BaseStep> T verifySidebarItemSupport(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemSupport(Class<T> stepContext,
                                                             Class<? extends BasePage> pageContext,
                                                             boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.SUPPORT, driver);
     }
 
-    public <T extends BaseStep> T verifySidebarItemMentors(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemMentors(Class<T> stepContext,
                                                             Class<? extends BasePage> pageContext,
                                                             boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.MENTOR_LIST, driver);
     }
 
-    public <T extends BaseStep> T verifySidebarItemGroups(Class<? extends BaseStep> stepContext,
+    public <T extends BaseStep> T verifySidebarItemGroups(Class<T> stepContext,
                                                             Class<? extends BasePage> pageContext,
                                                             boolean expected, WebDriver driver) {
         return verifySidebarItem(stepContext, pageContext, expected, Constants.PageName.GROUP_LIST, driver);
@@ -150,15 +150,14 @@ public abstract class BaseStep extends Step {
         }
     }
 
-    private <T extends BaseStep> T verifySidebarItem(Class<? extends BaseStep> stepContext,
+    private <T extends BaseStep> T verifySidebarItem(Class<T> stepContext,
                                                      Class<? extends BasePage> pageContext,
                                                      boolean expected, String item, WebDriver driver) {
         try {
             BasePage basePage = pageContext.getConstructor(WebDriver.class).newInstance(driver);
             Assert.assertEquals(basePage.sidebarItemExist(item), expected);
-            return (T) stepContext.getConstructor(WebDriver.class).newInstance(driver);
+            return stepContext.getConstructor(WebDriver.class).newInstance(driver);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            //TODO: add logging
             throw new RuntimeException("No such page or step");
         }
     }

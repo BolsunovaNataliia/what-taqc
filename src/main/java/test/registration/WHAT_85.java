@@ -1,8 +1,7 @@
 package test.registration;
 
 import org.testng.annotations.Test;
-import page.signin.SignInPage;
-import step.registration.RegistrationPageStep;
+import constants.Messages.Errors;
 import test.BaseTest;
 
 /**
@@ -12,9 +11,6 @@ import test.BaseTest;
 
 public class WHAT_85 extends BaseTest {
 
-    SignInPage signInPage;
-    RegistrationPageStep registrationPageStep;
-
     @Test
     public void atc_WHAT_85() {
         String firstName = "11111";
@@ -22,11 +18,6 @@ public class WHAT_85 extends BaseTest {
         String email = "abbadabba";
         String password = "Abba";
         String confirmPassword = "Dabba";
-        String errorFirstName = "Invalid first name";
-        String errorLastName = "Invalid last name";
-        String errorEmail = "Invalid email address";
-        String errorPassword = "Password must contain at least 8 characters";
-        String errorConfirmPassword = "You should confirm your password";
 
         // steps
         signInPageStep
@@ -37,11 +28,11 @@ public class WHAT_85 extends BaseTest {
                 .setPassword(password)                              // step('4')
                 .setConfirmPassword(confirmPassword)                // step('5')
                 .setConfirmPassword(confirmPassword)
-                .verifyErrorFirstName(errorFirstName)
-                .verifyErrorLastName(errorLastName)
-                .verifyErrorEmail(errorEmail)
-                .verifyErrorPassword(errorPassword)
-                .verifyErrorConfirmPassword(errorConfirmPassword)
+                .verifyErrorFirstName(Errors.INVALID_FIRST_NAME)
+                .verifyErrorLastName(Errors.INVALID_LAST_NAME)
+                .verifyErrorEmail(Errors.INVALID_EMAIL_ADDRESS)
+                .verifyErrorPassword(Errors.PASSWORD_MUST_CONTAIN_AT_LEAST_8_CHARACTERS)
+                .verifyErrorConfirmPassword(Errors.YOU_SHOULD_CONFIRM_YOUR_PASSWORD)
                 .verifySignUpBtnEnable()
                 .clickSignUpBtn();                                  // step('6')
     }

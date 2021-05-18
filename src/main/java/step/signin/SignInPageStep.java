@@ -1,14 +1,16 @@
 package step.signin;
 
-import constants.Classes;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import page.signin.SignInPage;
 import step.BaseStep;
 import step.Step;
 import step.registration.RegistrationPageStep;
-import step.student.ListOfStudentsPageStep;
-import step.support.SupportPageStep;
+
+import java.lang.reflect.InvocationTargetException;
+
+import static constants.Classes.Steps.LIST_OF_STUDENTS_PAGE_STEP;
+import static constants.Classes.Steps.SUPPORT_PAGE_STEP;
 
 public class SignInPageStep extends Step {
 
@@ -43,16 +45,19 @@ public class SignInPageStep extends Step {
         return this;
     }
 
-    public <T extends BaseStep> T clickSignInBtn(Class<? extends BaseStep> context, WebDriver driver) {
-        signInPage.clickSignInButton();
-        switch (context.getName()) {
-            case Classes.Steps.LIST_OF_STUDENTS_PAGE_STEP:
-                return (T) new ListOfStudentsPageStep(driver);
-            case Classes.Steps.SUPPORT_PAGE_STEP:
-                return (T) new SupportPageStep(driver);
-            default:
-                throw new RuntimeException("SignInPage not redirecting to this context");
+    public <T extends BaseStep> T clickSignInBtn(Class<T> context, WebDriver driver) {
+        if(context.getName().matches(LIST_OF_STUDENTS_PAGE_STEP+"|"+ SUPPORT_PAGE_STEP)) {
+            signInPage.clickSignInButton();
+            try {
+                Thread.sleep(1000);
+                return context.getConstructor(WebDriver.class).newInstance(driver);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                throw new RuntimeException("No such page");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+        throw new RuntimeException("Sign in page is not redirecting to such page");
     }
 
     public SignInPageStep clickSignInBtnNotSuccessful() {

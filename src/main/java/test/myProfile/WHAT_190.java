@@ -1,5 +1,8 @@
 package test.myProfile;
 
+import entity.ReaderFileJson;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
 import step.student.ListOfStudentsPageStep;
@@ -15,23 +18,21 @@ import constants.Constants;
 public class WHAT_190 extends BaseTest {
 
     @Test
-    public void atc_WHAT_190() {
-        String firstName="admin";
-        String lastName="admin";
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
+    @Parameters({"admin"})
+    public void atc_WHAT_190(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
 
         // step('preconditions')
         signInPageStep
-                .setEmail(email)
-                .setPassword(password)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
                 .clickSignInBtn(ListOfStudentsPageStep.class,driver)
                 .clickMyProfile(ListOfStudentPage.class,driver)
         // step('1')
                 .verifyPageName(Constants.PageName.MY_PROFILE)
-                .verifyFirstName(firstName)
-                .verifyLastName(lastName)
-                .verifyEmailAddress(email)
+                .verifyFirstName(user.getFirst_name())
+                .verifyLastName(user.getLast_name())
+                .verifyEmailAddress(user.getEmail())
                 .verifyChangePasswordBtnEnabled();
     }
 }

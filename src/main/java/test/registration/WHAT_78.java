@@ -1,5 +1,6 @@
 package test.registration;
 
+import constants.Messages.Errors;
 import org.testng.annotations.Test;
 import test.BaseTest;
 
@@ -12,17 +13,16 @@ public class WHAT_78 extends BaseTest {
 
     @Test
     public void atc_WHAT_78() {
-        String emptyField = "This field is required";
 
         // steps
         signInPageStep
                 .clickRegistrationLink(driver)
                 .clickSignUpBtn()
-                .verifyErrorFirstName(emptyField)
-                .verifyErrorLastName(emptyField)
-                .verifyErrorEmail(emptyField)
-                .verifyErrorPassword(emptyField)
-                .verifyErrorConfirmPassword(emptyField)
+                .verifyErrorFirstName(Errors.FIELD_IS_REQUIRED)
+                .verifyErrorLastName(Errors.FIELD_IS_REQUIRED)
+                .verifyErrorEmail(Errors.FIELD_IS_REQUIRED)
+                .verifyErrorPassword(Errors.FIELD_IS_REQUIRED)
+                .verifyErrorConfirmPassword(Errors.FIELD_IS_REQUIRED)
                 .verifySignUpBtnEnable();
     }
 }

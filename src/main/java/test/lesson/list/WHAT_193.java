@@ -1,5 +1,8 @@
 package test.lesson.list;
 
+import entity.ReaderFileJson;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
 import step.student.ListOfStudentsPageStep;
@@ -11,17 +14,15 @@ import test.BaseTest;
 
 public class WHAT_193 extends BaseTest {
 
-    //TODO parametrized
     @Test
-    public void atc_WHAT_193() {
-        //student
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
+    @Parameters({"student"})
+    public void atc_WHAT_193(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
 
         // step('preconditions')
         signInPageStep
-                .setEmail(email)
-                .setPassword(password)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
                 .clickSignInBtn(ListOfStudentsPageStep.class,driver)
         // step('1')
                 .verifySidebarItemLessons(ListOfStudentsPageStep.class, ListOfStudentPage.class,false, driver);

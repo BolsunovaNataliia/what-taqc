@@ -1,6 +1,9 @@
 package test.lesson.edit;
 
 import constants.Constants;
+import entity.ReaderFileJson;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
 import step.student.ListOfStudentsPageStep;
@@ -12,12 +15,11 @@ import test.BaseTest;
 
 public class WHAT_201 extends BaseTest {
 
-    //TODO parametrized and randomized
     @Test
-    public void atc_WHAT_201() {
+    @Parameters({"admin"})
+    public void atc_WHAT_201(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
         //admin, mentors
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
         int lessonId = 1;
         String oldName = "Types";
         String newName = "nameLessonNew";
@@ -25,8 +27,8 @@ public class WHAT_201 extends BaseTest {
 
         // step('preconditions')
         signInPageStep
-                .setEmail(email)
-                .setPassword(password)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
                 .clickSignInBtn(ListOfStudentsPageStep.class,driver)
                 .clickLessonSidebar(ListOfStudentPage.class, driver)
                 .verifyNamePage(Constants.PageName.LESSON_LIST)

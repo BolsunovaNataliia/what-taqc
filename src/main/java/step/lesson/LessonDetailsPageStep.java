@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import page.lesson.LessonDetailsPage;
 import step.BaseStep;
+import step.student.StudentDetailsPageStep;
 
 public class LessonDetailsPageStep extends BaseStep {
 
@@ -66,8 +67,9 @@ public class LessonDetailsPageStep extends BaseStep {
         return new ListOfLessonPageStep(driver);
     }
 
-    public void getToStudentDetailsPage(int number){
+    public StudentDetailsPageStep getToStudentDetailsPage(int number, WebDriver driver){
         lessonDetailsPage.clickStudent(number);
+        return new StudentDetailsPageStep(driver);
     }
 
     public void getToStudentDetailsPage(String name){
