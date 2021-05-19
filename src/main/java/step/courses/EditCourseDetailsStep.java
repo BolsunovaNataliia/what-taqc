@@ -39,7 +39,7 @@ public class EditCourseDetailsStep extends BaseStep {
         editCourseDetailsPage.clickCourseDetailsTab();
       return new CourseDetailsStep(driver);
     }
-    public EditCourseDetailsStep fillEditCourseNameInput(String courseName) throws InterruptedException {
+    public EditCourseDetailsStep fillEditCourseNameInput(String courseName) {
         editCourseDetailsPage.fillEditCourseNameInput(courseName);
       return this;
     }

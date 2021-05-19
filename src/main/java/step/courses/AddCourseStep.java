@@ -27,7 +27,7 @@ public class AddCourseStep extends BaseStep {
       return this;
     }
 
-    public AddCourseStep fillCourseNameInput(String courseName) throws InterruptedException {
+    public AddCourseStep fillCourseNameInput(String courseName) {
         addCoursePage.fillCourseNameInput(courseName);
       return this;
     }

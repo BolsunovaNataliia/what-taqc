@@ -34,25 +34,29 @@ public class CoursesPage extends BasePage {
     @FindBy(xpath = NUMBER_OF_COURSES)
     private WebElement numberOfCourses;
 
+    public CoursesPage(WebDriver driver) {
+        super(driver);
+    }
+
     public String getPageHeaderText(){
         return pageHeader.getText();
     }
 
-    public Boolean isNumberOfCoursesDisplayed(){
+    public boolean isNumberOfCoursesDisplayed(){
         return numberOfCourses.isDisplayed();
     }
 
-    public Boolean isSearchCourseInListInputDisplayed(){
+    public boolean isSearchCourseInListInputDisplayed(){
         return searchCourseInListInput.isDisplayed();
     }
 
-    public Boolean isAddCourseToListBtnDisplayed(){
+    public boolean isAddCourseToListBtnDisplayed(){
         return addCourseToListBtn.isDisplayed();
     }
 
     public String getCourseNameText(Integer courseID){
-        String courseIDXpath = "//tr[@data-student-id='"+courseID+"']/td[1]";
-        String courseNameXpath = "//tr[@data-student-id='"+courseID+"']/td[2]";
+        String courseIDXpath = "//tr[@data-student-id='"+ courseID +"']/td[1]";
+        String courseNameXpath = "//tr[@data-student-id='"+ courseID +"']/td[2]";
         if (!listOfCourseTableRows.isEmpty()) {
             for (WebElement webElement : listOfCourseTableRows) {
                 if (webElement.findElement(By.xpath(courseIDXpath)).getText().equals(courseID.toString())) {
@@ -61,10 +65,6 @@ public class CoursesPage extends BasePage {
             }
         }
         return null;
-    }
-
-    public CoursesPage(WebDriver driver) {
-        super(driver);
     }
 
     public void clickAddCourseToListBtn(){

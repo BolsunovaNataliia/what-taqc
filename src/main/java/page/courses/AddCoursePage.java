@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import page.BasePage;
 
-import static constants.XPath.AddCoursePage.*;
 import static constants.XPath.Common.*;
 
 public class AddCoursePage extends BasePage {
@@ -36,8 +35,8 @@ public class AddCoursePage extends BasePage {
         return invalidCourseNameError.getText();
     }
 
-    public void fillCourseNameInput(String courseName) throws InterruptedException {
-        Thread.sleep(1000);
+    public void fillCourseNameInput(String courseName) {
+        waitVisibility(courseNameInput, 1);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("document.evaluate('//input', document, null, 9, null).singleNodeValue.value = ''");
         courseNameInput.sendKeys(courseName);

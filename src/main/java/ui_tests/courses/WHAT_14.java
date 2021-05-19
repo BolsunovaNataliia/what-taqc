@@ -8,14 +8,18 @@ import ui_tests.BaseTest;
 
 public class WHAT_14 extends BaseTest {
 
-    @Test(groups = "admin" )
-    public void verifyValuesReturn() throws InterruptedException{
-
+    @Test
+    public void verifyValuesReturn() {
+        String email = "admin.@gmail.com";
+        String password = "admiN_12";
         String courseID = "0";
         String newCourseName = "Basic Course";
-        String initialCourseName = "Курс для демо";
+        String initialCourseName = "123 Testing";
 
         signInPageStep
+                // preconditions
+                .setEmail(email)
+                .setPassword(password)
                 .clickSignInBtn(ListOfStudentsPageStep.class, driver)
                 .clickCoursesSidebar(ListOfStudentPage.class,driver)
                 .verifyPageHeaderName(Constants.PageName.COURSE_LIST)
@@ -30,7 +34,7 @@ public class WHAT_14 extends BaseTest {
                 .fillEditCourseNameInput(newCourseName)
                 .verifyEditCourseNameInput(newCourseName)
                 // (step'3')
-                // Click on the 'Clear' button, verify that the 'Course Name' in it's initial state.
+                // Click on the 'Clear' button, verify that the 'Course Name' is in it's initial state.
                 .clickOnResetEditCourseNameInputBtn()
                 .verifyEditCourseNameInput(initialCourseName);
     }

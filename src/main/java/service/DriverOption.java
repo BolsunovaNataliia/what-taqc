@@ -1,6 +1,7 @@
 package service;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -10,8 +11,11 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -53,6 +57,14 @@ public class DriverOption {
                 if (environment.isIncognitoModeOn()) operaOptions.addArguments("-private");
                 WebDriverManager.operadriver().setup();
                 return new OperaDriver(operaOptions);
+            case "remote":
+                try {
+                    ChromeOptions chromeOptions1 = new ChromeOptions();
+                    chromeOptions1.setCapability("browserName", "chrome");
+                    return new RemoteWebDriver(new URL(System.getenv("CHROME_STANDALONE")), chromeOptions1);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             default:
                 throw new RuntimeException();
         }

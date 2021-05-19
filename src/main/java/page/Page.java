@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
-
 public abstract class Page {
 
     protected WebDriver driver;
@@ -13,7 +12,6 @@ public abstract class Page {
     public Page(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(this.driver, this);
-
     }
 
     protected void fillField(WebElement element, String inputText) {
@@ -21,7 +19,7 @@ public abstract class Page {
         element.sendKeys(inputText);
     }
 
-    protected  String getText(WebElement element){
+    protected String getText(WebElement element){
         return element.getText();
     }
 

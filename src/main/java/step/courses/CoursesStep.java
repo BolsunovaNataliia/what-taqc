@@ -17,17 +17,17 @@ public class CoursesStep extends BaseStep {
       return this;
     }
 
-    public CoursesStep verifyAddCourseToListBtnDisplayed(Boolean expected){
+    public CoursesStep verifyAddCourseToListBtnDisplayed(boolean expected){
         Assert.assertEquals(coursesPage.isAddCourseToListBtnDisplayed(), expected);
       return this;
     }
 
-    public CoursesStep verifyNumberOfCoursesDisplayed(Boolean expected){
+    public CoursesStep verifyNumberOfCoursesDisplayed(boolean expected){
         Assert.assertEquals(coursesPage.isNumberOfCoursesDisplayed(), expected);
       return this;
     }
 
-    public CoursesStep verifySearchCourseInListInputDisplayed(Boolean expected){
+    public CoursesStep verifySearchCourseInListInputDisplayed(boolean expected){
         Assert.assertEquals(coursesPage.isSearchCourseInListInputDisplayed(), expected);
       return this;
     }

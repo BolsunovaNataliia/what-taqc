@@ -11,7 +11,7 @@ import static constants.XPath.CourseDetailsPage.*;
 public class CourseDetailsPage extends BasePage {
 
     @FindBy(xpath = H3)
-    private WebElement pagesLabel;
+    private WebElement pageLabel;
     @FindBy(xpath = EDIT_COURSE_DETAILS_TAB)
     private WebElement editCourseDetailsTab;
     @FindBy(xpath = COURSE_NAME)
@@ -29,7 +29,7 @@ public class CourseDetailsPage extends BasePage {
         return courseName.getText();
     }
 
-    public String getPagesLabel() {
-        return pagesLabel.getText();
+    public String getPageLabelText() {
+        return pageLabel.getText();
     }
 }

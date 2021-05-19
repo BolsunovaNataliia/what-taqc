@@ -1,27 +1,29 @@
 package api_tests.student;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import org.testng.Assert;
+import api_tests.BaseTest;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 
-public class WHAT_159 {
+public class WHAT_159 extends BaseTest {
 
     @Test
-    public void WHAT_159() {
+    public void getApiStudentsId200Admin() {
 
-        Map<String, String> map = new HashMap<>();
-        map.put("email", "admin.@gmail.com");
-        map.put("password", "admiN_12");
-        Response response = RestAssured.given().body(map).contentType(ContentType.JSON).post("https://whatbackend.azurewebsites.net/api/accounts/auth");
-        String token = response.getHeader("authorization");
+        int id_student = 4;
+        String email = "name_stud@gmail.com";
+        String firstName = "FirstNameStud";
+        String lastName = "LastNameStud";
 
-        response = RestAssured.given().header("Authorization", token).get("https://whatbackend.azurewebsites.net//api/students/4");
-
-        Assert.assertEquals(200, response.statusCode());
+        given().
+                header("Authorization", getAdminToken()).
+                when().get("https://whatbackend.azurewebsites.net/api/students/" + id_student).
+                then().assertThat().statusCode(200).
+                and().body("id", equalTo(id_student)).
+                and().body("email", equalTo(email)).
+                and().body("firstName", equalTo(firstName)).
+                and().body("lastName", equalTo(lastName)).
+                and().log().body();
     }
 }

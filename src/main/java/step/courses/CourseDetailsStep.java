@@ -16,6 +16,12 @@ public class CourseDetailsStep extends BaseStep {
         Assert.assertEquals(courseDetailsPage.getCourseNameText(), expected);
       return this;
     }
+
+    public CourseDetailsStep verifyPageLabelText(String expected){
+        Assert.assertEquals(courseDetailsPage.getPageLabelText(), expected);
+      return this;
+    }
+
     public EditCourseDetailsStep clickEditCourseDetailsTab(WebDriver driver){
         courseDetailsPage.clickEditCourseDetailsTab();
       return new EditCourseDetailsStep(driver);
