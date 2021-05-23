@@ -41,6 +41,7 @@ public class CoursesStep extends BaseStep {
         coursesPage.clickAddCourseToListBtn();
       return new AddCourseStep(driver);
     }
+
     public CourseDetailsStep clickCourseTableRow(String id, WebDriver driver){
         coursesPage.clickCourseTableRow(id);
         return new CourseDetailsStep(driver);
@@ -50,22 +51,27 @@ public class CoursesStep extends BaseStep {
         coursesPage.clickCourseTableEditIcon(id);
         return new EditCourseDetailsStep(driver);
     }
+
     public CoursesStep fillSearchCourseInListInput(String title){
         coursesPage.fillSearchCourseInListInput(title);
       return this;
     }
+
     public CoursesStep changeCourseListIDSortType(){
         coursesPage.changeCourseListIDSortType();
       return this;
     }
+
     public CoursesStep changeCourseListNameSortType(){
         coursesPage.changeCourseListNameSortType();
       return this;
     }
+
     public CoursesStep clickLeftNavigationArrowBtn(){
         coursesPage.clickLeftNavigationArrowBtn();
       return this;
     }
+
     public CoursesStep clickRightNavigationArrowBtn(){
         coursesPage.clickRightNavigationArrowBtn();
       return this;

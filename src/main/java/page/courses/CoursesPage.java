@@ -1,10 +1,13 @@
 package page.courses;
 
+import org.apache.log4j.LogManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.apache.log4j.Logger;
 import page.BasePage;
+import page.group.ListOfGroupsPage;
 
 import java.util.List;
 
@@ -12,6 +15,8 @@ import static constants.XPath.Common.H2;
 import static constants.XPath.CoursesPage.*;
 
 public class CoursesPage extends BasePage {
+
+    private final Logger logger = LogManager.getLogger(ListOfGroupsPage.class);
 
     @FindBy(xpath = ADD_COURSE_TO_LIST_BTN)
     private WebElement addCourseToListBtn;
@@ -86,12 +91,14 @@ public class CoursesPage extends BasePage {
 
     public void clickCourseTableRow(String id){
         try { listOfCourseTableRows.get(Integer.parseInt(id)).click(); }
-        catch (NumberFormatException | IndexOutOfBoundsException e) { System.out.println("Exception"); }
+        catch (NumberFormatException e) { logger.error("ID is not a String"); }
+        catch (IndexOutOfBoundsException e) { logger.error("Index of ID String is out of range"); }
     }
 
     public void clickCourseTableEditIcon(String id){
         try { listOfCourseTableEditIcons.get(Integer.parseInt(id)).click(); }
-        catch (NumberFormatException | IndexOutOfBoundsException e) { System.out.println("Exception"); }
+        catch (NumberFormatException e) { logger.error("ID is not a String"); }
+        catch (IndexOutOfBoundsException e) { logger.error("Index of ID String is out of range"); }
     }
 
     public void clickLeftNavigationArrowBtn(){

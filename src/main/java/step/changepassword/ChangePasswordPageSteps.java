@@ -15,14 +15,33 @@ public class ChangePasswordPageSteps extends BaseStep {
         changePasswordPage = new ChangePasswordPage(driver);
     }
 
-    public ChangePasswordPageSteps verifiedElementsInitialStateStep(String email) throws InterruptedException {
-        Assert.assertTrue(
-                changePasswordPage.emailAddressIsFieldCorrectly(email)
-                        && changePasswordPage.newPasswordFieldIsEmpty()
-                        && changePasswordPage.currentPasswordFieldIsEmpty()
-                        && changePasswordPage.confirmPasswordFieldIsEmpty()
-                        && changePasswordPage.confirmSaveButtonIsDisable()
-                        && changePasswordPage.emailAddressFieldIsDisabled());
+    public ChangePasswordPageSteps verifiedEmailAddressIsFieldCorrectlyStep(String email) {
+        Assert.assertTrue(changePasswordPage.emailAddressIsFieldCorrectly(email));
+        return this;
+    }
+
+    public ChangePasswordPageSteps verifyNewPasswordFieldInitialStateStep() {
+        Assert.assertTrue(changePasswordPage.newPasswordFieldIsEmpty());
+        return this;
+    }
+
+    public ChangePasswordPageSteps verifyCurrentPasswordFieldInitialStateStep() {
+        Assert.assertTrue(changePasswordPage.currentPasswordFieldIsEmpty());
+        return this;
+    }
+
+    public ChangePasswordPageSteps verifyConfirmPasswordFieldInitialStateStep() {
+        Assert.assertTrue(changePasswordPage.confirmPasswordFieldIsEmpty());
+        return this;
+    }
+
+    public ChangePasswordPageSteps verifyConfirmSaveButtonIsDisableStep() {
+        Assert.assertTrue(changePasswordPage.confirmSaveButtonIsDisable());
+        return this;
+    }
+
+    public ChangePasswordPageSteps verifyEmailAddressFieldIsDisabledStep() {
+        Assert.assertTrue(changePasswordPage.emailAddressFieldIsDisabled());
         return this;
     }
 

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -14,9 +15,10 @@ public class WHAT_153 extends BaseTest {
 
     @Test
     public void createCourse200Admin() {
+        String newCourseID = "74";
+
         Map <String, String> courseMap = new HashMap<>();
-        courseMap.put("name","uniqueTest55");
-        String newCourseID = "55";
+        courseMap.put("name","Brand New Course" + newCourseID);
 
         given().
                 header("Authorization",getAdminToken()).
