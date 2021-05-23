@@ -17,7 +17,7 @@ public class WHAT_163 extends BaseTest {
     public void updateInformationAboutMentors200Admin(){
         String id_mentor = "38";
         Map<String, String> mapChanges = new HashMap<>();
-//        mapChanges.put("id", "115");
+
         mapChanges.put("firstName", "fsdadsa_1");
         mapChanges.put("lastName", "fvcdsfvds");
         mapChanges.put("email", "asddasdvhgvhj@gmail.com");
@@ -30,7 +30,6 @@ public class WHAT_163 extends BaseTest {
                 when().put("https://whatbackend.azurewebsites.net/api/mentors/" + id_mentor).
                 then().assertThat().statusCode(200).
 
-//                and().body("id", equalTo(mapChanges.get("id"))).
                 and().body("firstName", hasToString(mapChanges.get("firstName"))).
                 and().body("lastName",  hasToString(mapChanges.get("lastName"))).
                 and().body("email",     hasToString(mapChanges.get("email"))).
