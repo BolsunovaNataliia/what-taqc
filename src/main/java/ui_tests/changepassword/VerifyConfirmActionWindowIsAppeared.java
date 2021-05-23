@@ -1,11 +1,11 @@
 package ui_tests.changepassword;
 
 import constants.Messages.Alerts;
-import entity.ReaderFileJson;
 import entity.User;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
+import service.ReaderFileJson;
 import step.student.ListOfStudentsPageStep;
 import ui_tests.BaseTest;
 

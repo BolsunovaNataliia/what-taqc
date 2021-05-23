@@ -7,6 +7,6 @@ services:
   app:
     build: .
     environment:
-      CHROME_STANDALONE: "http://standalone:4444/wd/hub"
+      STANDALONE: "http://standalone:4444/wd/hub"
     depends_on:
       - standalone

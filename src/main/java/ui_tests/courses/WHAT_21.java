@@ -2,7 +2,7 @@ package ui_tests.courses;
 
 import constants.Constants;
 import constants.Messages.Errors;
-import entity.ReaderFileJson;
+import service.ReaderFileJson;
 import entity.User;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -14,7 +14,7 @@ public class WHAT_21 extends BaseTest {
 
     @Test
     @Parameters({"admin"})
-    public void verifySearchFillingSymbols(String path) throws InterruptedException {
+    public void verifySearchFillingSymbols(String path){
         User user = ReaderFileJson.readFileJsonUser(path);
 
         String invalidCourseName = "!@#$%^&*()";

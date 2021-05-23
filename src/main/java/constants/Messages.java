@@ -16,12 +16,17 @@ public class Messages {
         String FIELD_IS_REQUIRED = "This field is required",
                 INVALID_COURSE_NAME = "Invalid course name";
 
-
         String INVALID_FIRST_NAME = "Invalid first name",
                 INVALID_LAST_NAME = "Invalid last name",
                 INVALID_EMAIL_ADDRESS = "Invalid email address",
                 PASSWORD_MUST_CONTAIN_AT_LEAST_8_CHARACTERS = "Password must contain at least 8 characters",
                 YOU_SHOULD_CONFIRM_YOUR_PASSWORD = "You should confirm your password";
 
+    }
+
+    public interface Asserts{
+        String DO_NOT_CORRESPOND_TO_THE_REAL_ONES_BY = "The expected results '%s' do not correspond to the real ones By '%s'.",
+        THE_EXPECTED_RESULT_OF = "The expected results of %s :",
+        c = "";
     }
 }

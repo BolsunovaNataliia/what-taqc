@@ -1,7 +1,7 @@
 package ui_tests.student;
 
 import constants.Constants;
-import entity.ReaderFileJson;
+import service.ReaderFileJson;
 import entity.User;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;

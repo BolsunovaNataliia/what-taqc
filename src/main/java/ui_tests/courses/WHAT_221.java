@@ -1,7 +1,7 @@
 package ui_tests.courses;
 
 import constants.Constants;
-import entity.ReaderFileJson;
+import service.ReaderFileJson;
 import entity.User;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -13,7 +13,7 @@ public class WHAT_221 extends BaseTest {
 
     @Test
     @Parameters({"student"})
-    public void displayForStudent(String path) throws InterruptedException {
+    public void displayForStudent(String path) {
         User user = ReaderFileJson.readFileJsonUser(path);
 
         String courseNameBefSort = "fantasy111";

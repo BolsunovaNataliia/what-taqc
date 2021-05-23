@@ -1,6 +1,6 @@
 package ui_tests.student;
 
-import entity.ReaderFileJson;
+import service.ReaderFileJson;
 import entity.User;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
@@ -12,7 +12,6 @@ public class WHAT_197 extends BaseTest {
     @Test
     public void verifyStudentDetailsLessonsDisplayed(String path){
         User user = ReaderFileJson.readFileJsonUser(path);
-
 
         // step('preconditions')
         signInPageStep

@@ -1,7 +1,9 @@
 package api_tests.student;
 
 import api_tests.BaseTest;
+import constants.APIConst;
 import io.restassured.http.ContentType;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -13,25 +15,26 @@ import static org.hamcrest.Matchers.equalTo;
 public class WHAT_167 extends BaseTest {
 
     @Test
-    public void putStudents200Admin() {
-
+    @Parameters("admin")
+    public void putStudents200Admin(String path){
+        String request = "students/";
         // Changed student: id = 2, firstName = Student, lastName = Student, email = Student@gmail.org
 
         int id_student = 2;
         Map<String, String> mapChanges = new HashMap<>();
-        mapChanges.put("email", "testEmail_1@gmail.com");
-        mapChanges.put("firstName", "fn_1");
-        mapChanges.put("lastName", "ln_1");
+        mapChanges.put(APIConst.Data.EMAIL, "testEmail_1@gmail.com");
+        mapChanges.put(APIConst.Data.FIRST_NAME, "fn_1");
+        mapChanges.put(APIConst.Data.LAST_NAME, "ln_1");
 
         given().
-                header("Authorization", getAdminToken()).
+                header(APIConst.HEADER,getAdminToken(path)).
                 contentType(ContentType.JSON).
                 body(mapChanges).
-                when().put("https://whatbackend.azurewebsites.net/api/students/" + id_student).
+                when().put(APIConst.BASE_URL+ request + id_student).
                 then().assertThat().statusCode(200).
-                and().body("email", equalTo(mapChanges.get("email"))).
-                and().body("firstName", equalTo(mapChanges.get("firstName"))).
-                and().body("lastName", equalTo(mapChanges.get("lastName"))).
+                and().body(APIConst.Data.EMAIL, equalTo(mapChanges.get(APIConst.Data.EMAIL))).
+                and().body(APIConst.Data.FIRST_NAME, equalTo(mapChanges.get(APIConst.Data.FIRST_NAME))).
+                and().body(APIConst.Data.LAST_NAME, equalTo(mapChanges.get(APIConst.Data.LAST_NAME))).
                 and().log().body();
     }
 }

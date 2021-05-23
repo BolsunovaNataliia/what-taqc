@@ -1,6 +1,6 @@
 package ui_tests.myProfile;
 
-import entity.ReaderFileJson;
+import service.ReaderFileJson;
 import entity.User;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -33,6 +33,6 @@ public class WHAT_190 extends BaseTest {
                 .verifyFirstName(user.getFirst_name())
                 .verifyLastName(user.getLast_name())
                 .verifyEmailAddress(user.getEmail())
-                .verifyChangePasswordBtnEnabled();
+                .verifyChangePasswordBtnEnabled(true);
     }
 }

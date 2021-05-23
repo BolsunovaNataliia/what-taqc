@@ -1,11 +1,11 @@
 package ui_tests.lesson.edit;
 
 import constants.Constants;
-import entity.ReaderFileJson;
 import entity.User;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
+import service.ReaderFileJson;
 import step.student.ListOfStudentsPageStep;
 import ui_tests.BaseTest;
 
@@ -25,8 +25,8 @@ public class LessonEditPageTest extends BaseTest {
         signInPageStep
                 .setEmail(user.getEmail())
                 .setPassword(user.getPassword())
-                .clickSignInBtn(ListOfStudentsPageStep.class,driver)
-                .clickLessonSidebar(ListOfStudentPage.class,driver)
+                .clickSignInBtn(ListOfStudentsPageStep.class, driver)
+                .clickLessonSidebar(ListOfStudentPage.class, driver)
                 .clickLessonEdit(1, driver)
                 .verifyNamePage(Constants.PageName.LESSON_EDIT)
                 .verifyThemeName(themeName)
@@ -36,9 +36,9 @@ public class LessonEditPageTest extends BaseTest {
                 .verifyDateInputEnabled(true)
                 .verifyCancelButtonEnabled(true)
                 .verifySaveButtonEnabled(true)
-                .verifyFullStudentName(studentId,fullName)
+                .verifyFullStudentName(studentId, fullName)
                 .verifyMark(studentId, mark)
-                .verifyPresence(studentId,true)
-                .getToStudentDetailsPage(studentId);
+                .verifyPresence(studentId, true)
+                .getToStudentDetailsPage(studentId, driver);
     }
 }

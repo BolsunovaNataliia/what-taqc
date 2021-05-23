@@ -1,25 +1,28 @@
 package ui_tests.courses;
 
 import constants.Constants;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
+import service.ReaderFileJson;
 import step.student.ListOfStudentsPageStep;
 import ui_tests.BaseTest;
 
 public class WHAT_14 extends BaseTest {
 
     @Test
-    public void verifyValuesReturn() {
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
+    @Parameters({"admin"})
+    public void verifyValuesReturn(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
         String courseID = "0";
         String newCourseName = "Basic Course";
         String initialCourseName = "123 Testing";
 
         signInPageStep
                 // preconditions
-                .setEmail(email)
-                .setPassword(password)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
                 .clickSignInBtn(ListOfStudentsPageStep.class, driver)
                 .clickCoursesSidebar(ListOfStudentPage.class,driver)
                 .verifyPageHeaderName(Constants.PageName.COURSE_LIST)

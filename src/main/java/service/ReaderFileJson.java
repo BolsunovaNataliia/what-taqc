@@ -1,12 +1,12 @@
-package entity;
+package service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entity.User;
 
-import javax.jws.soap.SOAPBinding;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,14 +16,13 @@ public class ReaderFileJson {
     }
 
     private static String readFile(String path) {
-        try {
-            FileReader fileReader = new FileReader(path);
+        try (InputStream fis = ReaderFileJson.class.getClassLoader().getResourceAsStream("testData\\"+path)) {
             StringBuilder S = new StringBuilder();
-            Scanner sc = new Scanner(fileReader);
+            Scanner sc = new Scanner(fis);
             while (sc.hasNext()) {
                 S.append(sc.nextLine());
             }
-            fileReader.close();
+            fis.close();
             return S.toString();
         } catch (IOException e) {
             e.printStackTrace();

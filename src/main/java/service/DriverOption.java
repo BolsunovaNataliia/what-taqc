@@ -57,11 +57,30 @@ public class DriverOption {
                 if (environment.isIncognitoModeOn()) operaOptions.addArguments("-private");
                 WebDriverManager.operadriver().setup();
                 return new OperaDriver(operaOptions);
-            case "remote":
+            case "remoteChrome":
                 try {
                     ChromeOptions chromeOptions1 = new ChromeOptions();
                     chromeOptions1.setCapability("browserName", "chrome");
-                    return new RemoteWebDriver(new URL(System.getenv("CHROME_STANDALONE")), chromeOptions1);
+                    if (environment.isIncognitoModeOn()) chromeOptions1.addArguments("--incognito");
+                    return new RemoteWebDriver(new URL(System.getenv("STANDALONE")), chromeOptions1);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            case "remoteFirefox":
+                try {
+                    FirefoxOptions firefoxOptions1 = new FirefoxOptions();
+                    firefoxOptions1.setCapability("browserName", "firefox");
+                    if (environment.isIncognitoModeOn()) firefoxOptions1.addArguments("-private");
+                    return new RemoteWebDriver(new URL(System.getenv("STANDALONE")), firefoxOptions1);
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+            case "remoteOpera":
+                try {
+                    OperaOptions operaOptions1 = new OperaOptions();
+                    operaOptions1.setCapability("browserName", "opera");
+                    if (environment.isIncognitoModeOn()) operaOptions1.addArguments("-private");
+                    return new RemoteWebDriver(new URL(System.getenv("STANDALONE")), operaOptions1);
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }

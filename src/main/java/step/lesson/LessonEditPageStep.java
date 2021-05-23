@@ -1,9 +1,11 @@
 package step.lesson;
 
+import constants.Messages;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import page.lesson.LessonEditPage;
 import step.BaseStep;
+import step.student.StudentDetailsPageStep;
 
 public class LessonEditPageStep extends BaseStep {
 
@@ -14,67 +16,57 @@ public class LessonEditPageStep extends BaseStep {
     }
 
     public LessonEditPageStep verifyNamePage(String expected) {
-        Assert.assertEquals(lessonEditPage.getPageName(), expected);
+        Assert.assertEquals(lessonEditPage.getPageName(), expected,String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "PageName"));
         return this;
     }
 
     public LessonEditPageStep verifyThemeName(String expected) {
-        Assert.assertEquals(lessonEditPage.getThemeName(), expected);
+        Assert.assertEquals(lessonEditPage.getThemeName(), expected,String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "ThemeName"));
         return this;
     }
 
     public LessonEditPageStep verifyGroupName(String expected) {
-        Assert.assertEquals(lessonEditPage.getGroupName(), expected);
+        Assert.assertEquals(lessonEditPage.getGroupName(), expected,String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "GroupName"));
         return this;
     }
 
     public LessonEditPageStep verifyFullStudentName(int studentId, String expected) {
-        Assert.assertEquals(lessonEditPage.getFullStudentName(studentId), expected);
-        return this;
-    }
-
-    public LessonEditPageStep verifyMark(String studentName, String expected) {
-        Assert.assertEquals(lessonEditPage.getMark(studentName), expected);
+        Assert.assertEquals(lessonEditPage.getFullStudentName(studentId), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "FullStudentName"));
         return this;
     }
 
     public LessonEditPageStep verifyMark(int studentId, String expected) {
-        Assert.assertEquals(lessonEditPage.getMark(studentId), expected);
-        return this;
-    }
-
-    public LessonEditPageStep verifyPresence(String studentName, boolean expected) {
-        Assert.assertEquals(lessonEditPage.getPresence(studentName), expected);
+        Assert.assertEquals(lessonEditPage.getMark(studentId), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "Mark"));
         return this;
     }
 
     public LessonEditPageStep verifyPresence(int studentId, boolean expected) {
-        Assert.assertEquals(lessonEditPage.getPresence(studentId), expected);
+        Assert.assertEquals(lessonEditPage.getPresence(studentId), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "Presence"));
         return this;
     }
 
     public LessonEditPageStep verifyGroupNameEnabled(boolean expected) {
-        Assert.assertEquals(lessonEditPage.isGroupNameEnabled(), expected);
+        Assert.assertEquals(lessonEditPage.isGroupNameEnabled(), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "GroupName enabled"));
         return this;
     }
 
     public LessonEditPageStep verifyThemeNameEnabled(boolean expected) {
-        Assert.assertEquals(lessonEditPage.isThemeNameInputEnabled(), expected);
+        Assert.assertEquals(lessonEditPage.isThemeNameInputEnabled(), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "ThemeName enabled"));
         return this;
     }
 
     public LessonEditPageStep verifyDateInputEnabled(boolean expected) {
-        Assert.assertEquals(lessonEditPage.isDateInputEnabled(), expected);
+        Assert.assertEquals(lessonEditPage.isDateInputEnabled(), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "DateInput enabled"));
         return this;
     }
 
     public LessonEditPageStep verifyCancelButtonEnabled(boolean expected) {
-        Assert.assertEquals(lessonEditPage.isCancelButtonEnabled(), expected);
+        Assert.assertEquals(lessonEditPage.isCancelButtonEnabled(), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "CancelButton enabled"));
         return this;
     }
 
     public LessonEditPageStep verifySaveButtonEnabled(boolean expected) {
-        Assert.assertEquals(lessonEditPage.isSaveButtonEnabled(), expected);
+        Assert.assertEquals(lessonEditPage.isSaveButtonEnabled(), expected, String.format(Messages.Asserts.THE_EXPECTED_RESULT_OF, "SaveButton enabled"));
         return this;
     }
 
@@ -93,18 +85,8 @@ public class LessonEditPageStep extends BaseStep {
         return this;
     }
 
-    public LessonEditPageStep clickPresenceOfStudent(String name) {
-        lessonEditPage.clickPresence(name);
-        return this;
-    }
-
     public LessonEditPageStep setMarkOfStudent(int number, int input) {
         lessonEditPage.setMark(number, input);
-        return this;
-    }
-
-    public LessonEditPageStep setMarkOfStudent(String name, int input) {
-        lessonEditPage.setMark(name, input);
         return this;
     }
 
@@ -118,17 +100,9 @@ public class LessonEditPageStep extends BaseStep {
         return context;
     }
 
-    public LessonEditPageStep clickSaveButton(LessonEditPageStep  context, WebDriver driver) {
-        lessonEditPage.clickSaveButton();
-        return context;
-    }
-
-    public void getToStudentDetailsPage(int number) {
+    public StudentDetailsPageStep getToStudentDetailsPage(int number, WebDriver driver) {
         lessonEditPage.clickStudent(number);
-    }
-
-    public void getToStudentDetailsPage(String name) {
-        lessonEditPage.clickStudent(name);
+        return new StudentDetailsPageStep(driver);
     }
 
 }
