@@ -17,10 +17,10 @@ public class WHAT_175 extends BaseTest {
         String firstResult = "[0].%s";
         String secondResult = "[1].%s";
 
-        String[] notAssignedUserID = new String[] {"115", "116"};
-        String[] notAssignedUserFirstName = new String[] {"FirstName", "John"};
-        String[] notAssignedUserLastName = new String[] {"LastName", "Doe"};
-        String[] notAssignedUserEmail = new String[] {"u.s.e.r+averyrobinson33@what_WH.at", "u.se.r+stevebabyak82@what_WH.at"};
+        String[] notAssignedUserID = new String[] {"112", "113"};
+        String[] notAssignedUserFirstName = new String[] {"Student", "Secretary"};
+        String[] notAssignedUserLastName = new String[] {"Student", "Secretary"};
+        String[] notAssignedUserEmail = new String[] {"user+samanthamartin92@what_WH.at", "u.ser+charlesscott18@what_WH.at"};
         String[] notAssignedUserRole = new String[] {"0", "1"};
         String[] notAssignedUserIsActive = new String[] {"true", "false"};
 
