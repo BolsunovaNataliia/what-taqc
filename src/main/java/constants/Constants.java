@@ -2,7 +2,8 @@ package constants;
 
 public class Constants {
 
-    public static String NUMBER = "#";
+    public static String NUMBER = "#",
+            EMPTY_STRING = "";
 
     public interface PageName {
         String MY_PROFILE = "My Profile",

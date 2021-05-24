@@ -1,17 +1,21 @@
 package ui_tests.lesson.edit;
 
 import constants.Constants;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
+import service.ReaderFileJson;
 import step.student.ListOfStudentsPageStep;
 import ui_tests.BaseTest;
 
 public class LessonEditPageTest extends BaseTest {
 
     @Test
-    public void exampleLessonTest() {
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
+    @Parameters({"admin"})
+    public void exampleLessonTest(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
+
         String themeName = "Types";
         String groupName = "Griffindorrr";
         String fullName = "Pavel Kundenko";
@@ -19,10 +23,10 @@ public class LessonEditPageTest extends BaseTest {
         int studentId = 1;
 
         signInPageStep
-                .setEmail(email)
-                .setPassword(password)
-                .clickSignInBtn(ListOfStudentsPageStep.class,driver)
-                .clickLessonSidebar(ListOfStudentPage.class,driver)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
+                .clickSignInBtn(ListOfStudentsPageStep.class, driver)
+                .clickLessonSidebar(ListOfStudentPage.class, driver)
                 .clickLessonEdit(1, driver)
                 .verifyNamePage(Constants.PageName.LESSON_EDIT)
                 .verifyThemeName(themeName)
@@ -32,9 +36,9 @@ public class LessonEditPageTest extends BaseTest {
                 .verifyDateInputEnabled(true)
                 .verifyCancelButtonEnabled(true)
                 .verifySaveButtonEnabled(true)
-                .verifyFullStudentName(studentId,fullName)
+                .verifyFullStudentName(studentId, fullName)
                 .verifyMark(studentId, mark)
-                .verifyPresence(studentId,true)
-                .getToStudentDetailsPage(studentId);
+                .verifyPresence(studentId, true)
+                .getToStudentDetailsPage(studentId, driver);
     }
 }

@@ -1,47 +1,55 @@
 package api_tests.courses;
 
 import api_tests.BaseTest;
+import constants.APIConst;
 import io.restassured.http.ContentType;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasToString;
 
 public class WHAT_140 extends BaseTest {
 
+    private static String adminToken;
+    private static String firstRequest = "courses/";
+
     @Test
-    public void disableCourse200Admin(){
+    @Parameters("admin")
+    public void disableCourse200Admin(String path) {
+        String secondRequest = "isActive";
+        String result = "[58].%s";
         String courseID = "59";
         String courseName = "unique_Test-55";
-        String adminToken = getAdminToken();
+        adminToken = getAdminToken(path);
 
         // (step'1')
         given().
-                header("Authorization", adminToken).
+                header(APIConst.HEADER, adminToken).
                 contentType(ContentType.BINARY).
-                when().delete("https://whatbackend.azurewebsites.net/api/courses/" + courseID).
+                when().delete(APIConst.BASE_URL + firstRequest + courseID).
                 then().assertThat().statusCode(200).
-                and().assertThat().body(hasToString("true")).
+                and().assertThat().body(hasToString(APIConst.Result.TRUE)).
                 and().log().body();
 
         // (step'2')
         given().
-                header("Authorization", adminToken).
-                when().get("https://whatbackend.azurewebsites.net/api/courses/isActive").
+                header(APIConst.HEADER, adminToken).
+                when().get(APIConst.BASE_URL + firstRequest + secondRequest).
                 then().assertThat().statusCode(200).
-                and().body("[58].name",hasToString(courseName)).
-                and().body("[58].isActive", hasToString("false")).
+                and().body(String.format(result, APIConst.Data.NAME), hasToString(courseName)).
+                and().body(String.format(result, APIConst.Data.IS_ACTIVE), hasToString(APIConst.Result.FALSE)).
                 and().log().body();
     }
 
     @AfterClass
-    public void enableCourse(){
+    public void enableCourse() {
         String courseID = "59";
 
         given().
-                header("Authorization",getAdminToken()).
-                when().patch("https://whatbackend.azurewebsites.net/api/courses/" + courseID).
+                header(APIConst.HEADER, adminToken).
+                when().patch(APIConst.BASE_URL + firstRequest + courseID).
                 then().log().body();
     }
 }

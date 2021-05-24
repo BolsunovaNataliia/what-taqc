@@ -2,7 +2,7 @@ package service;
 
 public interface DefaultDriverOptions {
 
-    String browserType = "remote";
+    String browserType = "remoteChrome";
     String appUrl = "https://gentle-moss-0bbec9003.azurestaticapps.net";
     String fullScreenMode = "true";
     String incognitoModeOn = "false";

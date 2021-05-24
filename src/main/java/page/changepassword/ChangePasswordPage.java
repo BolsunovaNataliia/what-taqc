@@ -110,6 +110,10 @@ public class ChangePasswordPage extends BasePage {
         return pagesLabel.getText();
     }
 
+    public void clickOnPageLable() {
+        pagesLabel.click();
+    }
+
     public void clickOnCurrentPasswordField() {
         currentPasswordField.click();
     }

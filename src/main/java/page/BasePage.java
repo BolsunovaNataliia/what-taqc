@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class BasePage extends Page {
 
-    private static final String USER_ICON_XPATH ="//a[@class='header__header__account-user--icon___1k48U']";
+    private static final String USER_ICON_XPATH ="a[@class='header__header__account-user--icon___1k48U']";
 
     @FindBy( xpath = "//div[contains(@class,'header__header__logo___2h_2V')]")
     private WebElement logo;

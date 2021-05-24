@@ -1,6 +1,9 @@
 package ui_tests.lesson.details;
 
 import constants.Constants;
+import service.ReaderFileJson;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.student.ListOfStudentPage;
 import step.student.ListOfStudentsPageStep;
@@ -8,10 +11,11 @@ import ui_tests.BaseTest;
 
 public class LessonDetailsPageTest extends BaseTest {
 
-    @Test
-    public void  exampleLessonTest() {
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
+    @Test(groups = { "admin" })
+    @Parameters({"user"})
+    public void  exampleLessonTest(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
+
         String themeName = "Types";
         String groupName = "Griffindorrr";
         String mentorName = "Леголас New";
@@ -22,8 +26,6 @@ public class LessonDetailsPageTest extends BaseTest {
         int studentId = 1;
 
         signInPageStep
-                .setEmail(email)
-                .setPassword(password)
                 .clickSignInBtn(ListOfStudentsPageStep.class,driver)
                 .clickLessonSidebar(ListOfStudentPage.class,driver)
                 .clickLessonDetails(1, driver)

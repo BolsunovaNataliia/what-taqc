@@ -1,6 +1,8 @@
 package ui_tests.registration;
 
 import java.util.Random;
+
+import constants.Messages.Alerts;
 import org.testng.annotations.Test;
 import ui_tests.BaseTest;
 
@@ -10,9 +12,6 @@ import ui_tests.BaseTest;
  */
 
 public class WHAT_73 extends BaseTest {
-
-    String successMessage = "You have successfully registered. " +
-            "Please, wait until your account is approved and your role is assigned";
 
     @Test
     public void atc_WHAT_73() {
@@ -36,7 +35,7 @@ public class WHAT_73 extends BaseTest {
                 .verifyConfirmPassword(confirmPassword)
                 .verifySignUpBtnEnable()
                 .clickSignUpBtn()                                       // step('6')
-                .verifySuccessAlert(successMessage)                     // step('7')
+                .verifySuccessAlert(Alerts.SUCCESS_MESSAGE_REGISTRATION)// step('7')
                 .verifySuccessRegistrationBtnEnable()
                 .clickSuccessRegistrationBtn();
     }

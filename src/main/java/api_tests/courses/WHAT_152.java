@@ -1,8 +1,10 @@
 package api_tests.courses;
 
 import api_tests.BaseTest;
+import constants.APIConst;
 import io.restassured.http.ContentType;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -13,24 +15,28 @@ import static org.hamcrest.Matchers.hasToString;
 
 public class WHAT_152 extends BaseTest {
 
+    private static String adminToken;
+    private static String request = "courses/";
+
     @Test
-    public void updateCourseName200Admin(){
+    @Parameters("admin")
+    public void updateCourseName200Admin(String path) {
         String courseID = "60";
-        String adminToken = getAdminToken();
+        adminToken = getAdminToken(path);
 
         Map<String, String> newNameMap = new HashMap<>();
-        newNameMap.put("name","New Epic Course");
+        newNameMap.put(APIConst.Data.NAME,"New Epic Course");
 
         // (step'1')
         System.out.println(newNameMap);
         given().
-                header("Authorization", adminToken).
+                header(APIConst.HEADER, adminToken).
                 contentType(ContentType.JSON).
                 body(newNameMap).
-                when().put("https://whatbackend.azurewebsites.net/api/courses/" + courseID).
+                when().put(APIConst.BASE_URL + request + courseID).
                 then().assertThat().statusCode(200).
-                and().assertThat().body("id",hasToString(courseID)).
-                and().assertThat().body("name",hasToString(newNameMap.get("name"))).
+                and().assertThat().body(APIConst.Data.ID,hasToString(courseID)).
+                and().assertThat().body(APIConst.Data.NAME,hasToString(newNameMap.get(APIConst.Data.NAME))).
                 and().log().body();
 
     }
@@ -38,16 +44,15 @@ public class WHAT_152 extends BaseTest {
     @AfterClass
     public void resetCourseName() {
         String courseID = "60";
-        String adminToken = getAdminToken();
 
         Map<String, String> oldNameMap = new HashMap<>();
-        oldNameMap.put("name","Course for Update Test");
+        oldNameMap.put(APIConst.Data.NAME,"Course for Update Test");
 
         given().
-                header("Authorization", adminToken).
+                header(APIConst.HEADER, adminToken).
                 contentType(ContentType.JSON).
                 body(oldNameMap).
-                when().put("https://whatbackend.azurewebsites.net/api/courses/" + courseID).
+                when().put(APIConst.BASE_URL + request + courseID).
                 then().log().body();
     }
 }

@@ -1,6 +1,9 @@
 package ui_tests.courses;
 
 import constants.Constants;
+import service.ReaderFileJson;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import page.support.SupportPage;
 import step.support.SupportPageStep;
@@ -9,16 +12,17 @@ import ui_tests.BaseTest;
 public class WHAT_221 extends BaseTest {
 
     @Test
-    public void displayForStudent(){
-        String email = "student@gmail.com";
-        String password = "What_123";
-        String courseNameBefSort = "Kulllll course";
+    @Parameters({"student"})
+    public void displayForStudent(String path) {
+        User user = ReaderFileJson.readFileJsonUser(path);
+
+        String courseNameBefSort = "fantasy111";
         int courseIDBefSort = 7;
 
         signInPageStep
                 // Preconditions.
-                .setEmail(email)
-                .setPassword(password)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
                 .clickSignInBtn(SupportPageStep.class, driver)
                 .verifySidebarItemSupport(SupportPageStep.class, SupportPage.class, true, driver)
                 // Steps.

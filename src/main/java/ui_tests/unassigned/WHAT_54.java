@@ -1,46 +1,40 @@
 package ui_tests.unassigned;
 
-import org.testng.annotations.BeforeClass;
+import entity.User;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import page.signin.SignInPage;
-import step.unassigned.ListOfUnassignedUsersPageStep;
+import page.student.ListOfStudentPage;
+import service.ReaderFileJson;
+import step.student.ListOfStudentsPageStep;
 import ui_tests.BaseTest;
 
-import static constants.Constants.UnassignedUsersSelectRole.*;
-import static constants.Constants.UsersSort.*;
+import static constants.Constants.UnassignedUsersSelectRole.SECRETARY;
+import static constants.Constants.UsersSort.EMAIL;
 
 public class WHAT_54 extends BaseTest {
-    ListOfUnassignedUsersPageStep coursesStep;
-    SignInPage signInPage;
-    @BeforeClass
-    public void preCond(){
-        signInPage = new SignInPage(driver);
-        String email = "admin.@gmail.com";
-        String password = "admiN_12";
-
-        signInPage.fillEmail(email);
-        signInPage.fillPassword(password);
-        signInPage.clickSignInButton();
-        coursesStep = new ListOfUnassignedUsersPageStep(driver);
-    }
 
     @Test
-    public void atc_WHAT_54(){
+    @Parameters({"admin"})
+    public void atc_WHAT_54(String path){
+        User user = ReaderFileJson.readFileJsonUser(path);
         String mailOfUser = "abbadabba@gmail.com";
         String expectedSurnameUser = "Dabba";
 
 
-        coursesStep.verifyUnassignedUserSurname(1, expectedSurnameUser)
-                   .verifyUnassignedUserSurname(mailOfUser, expectedSurnameUser)
-
-                   .verifyAddRoleButtonEnabled(1, true)
-                   .verifyChoseSortEnabled(EMAIL, true)
-
-                   .verifyChoseUserRole(1, SECRETARY, true)
-                   .choseUserRole(1, SECRETARY);
-        coursesStep.choseSortType(EMAIL);
-        coursesStep.verifyChoseSortEnabled(EMAIL, true)
-                   .verifyChoseUserRole(1, SECRETARY, true);
+        signInPageStep
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
+                .clickSignInBtn(ListOfStudentsPageStep.class, driver)
+                .clickUnassignedSidebar(ListOfStudentPage.class, driver)
+                .verifyUnassignedUserSurname(1, expectedSurnameUser)
+                .verifyUnassignedUserSurname(mailOfUser, expectedSurnameUser)
+                .verifyAddRoleButtonEnabled(1, true)
+                .verifyChoseSortEnabled(EMAIL, true)
+                .verifyChoseUserRole(1, SECRETARY, true)
+                .choseUserRole(1, SECRETARY)
+                .choseSortType(EMAIL)
+                .verifyChoseSortEnabled(EMAIL, true)
+                .verifyChoseUserRole(1, SECRETARY, true);
 
     }
 }

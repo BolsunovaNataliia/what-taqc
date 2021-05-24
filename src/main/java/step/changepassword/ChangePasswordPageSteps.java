@@ -79,6 +79,7 @@ public class ChangePasswordPageSteps extends BaseStep {
 
     public ChangePasswordPageSteps verifyCurrentPasswordFieldErrorMessage(String errorString, boolean expected) {
         changePasswordPage.clickOnCurrentPasswordField();
+        changePasswordPage.clickOnPageLable();
         boolean actual = changePasswordPage.verifyCurrentPasswordErrorField(errorString);
         Assert.assertEquals(actual, expected, "Error message [" + errorString + "] did not found.");
         return this;
