@@ -1,7 +1,8 @@
 package api_tests.unassigned;
 
-
 import api_tests.BaseTest;
+import constants.APIConst;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -10,7 +11,11 @@ import static org.hamcrest.Matchers.*;
 public class WHAT_175 extends BaseTest {
 
     @Test
-    public void getNotAssigned200Admin(){
+    @Parameters("admin")
+    public void getNotAssigned200Admin(String path){
+        String request = "accounts/NotAssigned";
+        String firstResult = "[0].%s";
+        String secondResult = "[1].%s";
 
         String[] notAssignedUserID = new String[] {"115", "116"};
         String[] notAssignedUserFirstName = new String[] {"FirstName", "John"};
@@ -20,23 +25,23 @@ public class WHAT_175 extends BaseTest {
         String[] notAssignedUserIsActive = new String[] {"true", "false"};
 
         given().
-                header("Authorization",getAdminToken()).
-                when().get("https://whatbackend.azurewebsites.net/api/accounts/NotAssigned").
+                header(APIConst.HEADER, getAdminToken(path)).
+                when().get(APIConst.BASE_URL + request).
                 then().assertThat().statusCode(200).
 
-                and().body("[0].id", hasToString(notAssignedUserID[0])).
-                and().body("[0].firstName", hasToString(notAssignedUserFirstName[0])).
-                and().body("[0].lastName", hasToString(notAssignedUserLastName[0])).
-                and().body("[0].email", hasToString(notAssignedUserEmail[0])).
-                and().body("[0].role", hasToString(notAssignedUserRole[0])).
-                and().body("[0].isActive", hasToString(notAssignedUserIsActive[0])).
+                and().body(String.format(firstResult, APIConst.Data.ID), hasToString(notAssignedUserID[0])).
+                and().body(String.format(firstResult, APIConst.Data.FIRST_NAME), hasToString(notAssignedUserFirstName[0])).
+                and().body(String.format(firstResult, APIConst.Data.LAST_NAME), hasToString(notAssignedUserLastName[0])).
+                and().body(String.format(firstResult, APIConst.Data.EMAIL), hasToString(notAssignedUserEmail[0])).
+                and().body(String.format(firstResult, APIConst.Data.ROLE), hasToString(notAssignedUserRole[0])).
+                and().body(String.format(firstResult, APIConst.Data.IS_ACTIVE), hasToString(notAssignedUserIsActive[0])).
 
-                and().body("[1].id", hasToString(notAssignedUserID[1])).
-                and().body("[1].firstName", hasToString(notAssignedUserFirstName[1])).
-                and().body("[1].lastName", hasToString(notAssignedUserLastName[1])).
-                and().body("[1].email", hasToString(notAssignedUserEmail[1])).
-                and().body("[1].role", hasToString(notAssignedUserRole[0])).
-                and().body("[1].isActive", hasToString(notAssignedUserIsActive[0])).
+                and().body(String.format(secondResult, APIConst.Data.ID), hasToString(notAssignedUserID[1])).
+                and().body(String.format(secondResult, APIConst.Data.FIRST_NAME), hasToString(notAssignedUserFirstName[1])).
+                and().body(String.format(secondResult, APIConst.Data.LAST_NAME), hasToString(notAssignedUserLastName[1])).
+                and().body(String.format(secondResult, APIConst.Data.EMAIL), hasToString(notAssignedUserEmail[1])).
+                and().body(String.format(secondResult, APIConst.Data.ROLE), hasToString(notAssignedUserRole[0])).
+                and().body(String.format(secondResult, APIConst.Data.IS_ACTIVE), hasToString(notAssignedUserIsActive[0])).
 
                 and().log().body();
     }
